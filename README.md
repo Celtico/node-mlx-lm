@@ -48,11 +48,13 @@ const chat = new ChatModel('/path/to/model');
 const examples = fs.readFileSync('train.jsonl', 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
 await trainLora(chat, examples, {
   adapterPath: '/tmp/adapters', iters: 100, learningRate: 1e-5, numLayers: 8,
-  maskPrompt: true, gradCheckpoint: true, onReport: (report) => console.log(report),
+  maskPrompt: true, gradCheckpoint: true, deltaChunk: 64, onReport: (report) => console.log(report),
 });
 
 chat.model.loadAdapters('/tmp/adapters'); // or adapters made by `mlx_lm lora`
 ```
+
+Long examples on a small Mac: with `gradCheckpoint: true` the loss is computed in chunks of 256 positions, and for Qwen 3.5 models (Gated DeltaNet layers) `deltaChunk: 64` computes the recurrence in chunkwise form, which keeps one state per chunk instead of one per token. With MiMo 9B on a 16 GB Mac that is the difference between 512 tokens not fitting and 1,536 training in 11.1 GB (2,048 in one step, 12.2 GB).
 
 Calls are synchronous and use the GPU: run the model in its own process (a `child_process` or an Electron `utilityProcess`) so your UI never waits on it.
 
