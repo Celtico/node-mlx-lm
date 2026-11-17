@@ -119,7 +119,11 @@ async function trainLora(chat, data, options = {}) {
   for (it = 1; it <= o.iters; it++) {
     if (o.signal?.aborted) break;
     const e = examples[next.next().value];
-    const r = engine.trainStep(e.tokens, e.offset, e.length, { learningRate: o.learningRate, gradCheckpoint: o.gradCheckpoint });
+    // Engine memory options (@celticopetit/mlx-node >= 0.1.1), passed only when given: lossChunk,
+    // deltaChunk (the Gated DeltaNet in chunkwise form) and deltaSegment.
+    const step = { learningRate: o.learningRate, gradCheckpoint: o.gradCheckpoint };
+    for (const name of ['lossChunk', 'deltaChunk', 'deltaSegment']) if (o[name] !== undefined) step[name] = o[name];
+    const r = engine.trainStep(e.tokens, e.offset, e.length, step);
     window.loss += r.loss;
     window.steps += 1;
     window.tokens += r.tokens;
