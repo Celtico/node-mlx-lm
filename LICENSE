@@ -19,9 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-chat.js and lora.js follow mlx-lm (tokenizer and chat template handling,
-tuner/: ChatDataset, iterate_batches, the loss and the adapter files).
-mlx-lm is Copyright © 2023-2025 Apple Inc., MIT License.

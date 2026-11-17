@@ -64,4 +64,4 @@ TINY_MODEL=/tmp/tiny npm test
 
 ## Licence
 
-MIT. It follows [mlx-lm](https://github.com/ml-explore/mlx-lm) (MIT, Apple Inc.); see `LICENSE`.
+MIT. It follows [mlx-lm](https://github.com/ml-explore/mlx-lm) (MIT, Apple Inc.); see `NOTICE`.

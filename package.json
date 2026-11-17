@@ -35,7 +35,8 @@
     "chat.js",
     "lora.js",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ],
   "scripts": {
     "test": "node --test test/*.test.js"
