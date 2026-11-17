@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Tokenizer } = require('@huggingface/tokenizers');
 const { Template } = require('@huggingface/jinja');
-const { NativeModel } = require('@celtico/mlx-node');
+const { NativeModel } = require('@celticopetit/mlx-node');
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));

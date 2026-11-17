@@ -32,7 +32,7 @@ if (flag('--compare') && !process.env.PROVA_DUMP) {
 
 let t0 = Date.now();
 const chat = new ChatModel(modelDir);
-console.log(`Model carregat en ${((Date.now() - t0) / 1000).toFixed(1)} s (Metal: ${require('@celtico/mlx-node').metal})`);
+console.log(`Model carregat en ${((Date.now() - t0) / 1000).toFixed(1)} s (Metal: ${require('@celticopetit/mlx-node').metal})`);
 
 const messages = [{ role: 'user', content: message }];
 const ids = chat.encode(chat.prompt(messages));

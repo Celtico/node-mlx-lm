@@ -1,8 +1,8 @@
-# @celtico/node-mlx-lm
+# @celticopetit/node-mlx-lm
 
 Chat with and fine-tune MLX language models from Node.js — no Python.
 
-The JavaScript side of [mlx-lm](https://github.com/ml-explore/mlx-lm), on top of the native engine [@celtico/mlx-node](https://github.com/Celtico/mlx-node):
+The JavaScript side of [mlx-lm](https://github.com/ml-explore/mlx-lm), on top of the native engine [@celticopetit/mlx-node](https://github.com/Celtico/mlx-node):
 
 - **Chat**: the model's tokenizer (`@huggingface/tokenizers`) and chat template (`@huggingface/jinja`), with streaming text. Greedy output is token-for-token identical to `mlx_lm`.
 - **Prompt cache**: the next message of a conversation only reads what is new.
@@ -13,15 +13,15 @@ Supports **Qwen 3.5** models in mlx-community format (for example MiMo V2.6 9B, 
 ## Install
 
 ```sh
-npm install @celtico/node-mlx-lm
+npm install @celticopetit/node-mlx-lm
 ```
 
-This installs `@celtico/mlx-node`, which downloads its prebuilt engine and MLX. Nothing is compiled.
+This installs `@celticopetit/mlx-node`, which downloads its prebuilt engine and MLX. Nothing is compiled.
 
 ## Chat
 
 ```js
-const { ChatModel } = require('@celtico/node-mlx-lm');
+const { ChatModel } = require('@celticopetit/node-mlx-lm');
 
 const chat = new ChatModel('/path/to/mlx-community/model');
 for (const piece of chat.stream([{ role: 'user', content: 'Write a JavaScript function that adds two numbers.' }], { maxTokens: 200 })) {
@@ -38,7 +38,7 @@ Examples are conversations in the `mlx_lm` chat format, one per line of a `.json
 
 ```js
 const fs = require('node:fs');
-const { ChatModel, trainLora } = require('@celtico/node-mlx-lm');
+const { ChatModel, trainLora } = require('@celticopetit/node-mlx-lm');
 
 const chat = new ChatModel('/path/to/model');
 const examples = fs.readFileSync('train.jsonl', 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));

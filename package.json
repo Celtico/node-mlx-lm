@@ -1,7 +1,7 @@
 {
-  "name": "@celtico/node-mlx-lm",
+  "name": "@celticopetit/node-mlx-lm",
   "version": "0.1.0",
-  "description": "Chat with and fine-tune MLX language models from Node.js — no Python. Tokenizer, chat templates, streaming and LoRA training like mlx-lm, on @celtico/mlx-node.",
+  "description": "Chat with and fine-tune MLX language models from Node.js — no Python. Tokenizer, chat templates, streaming and LoRA training like mlx-lm, on @celticopetit/mlx-node.",
   "main": "index.js",
   "license": "MIT",
   "author": "Cel Ticó Petit",
@@ -42,7 +42,7 @@
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
-    "@celtico/mlx-node": "0.1.0",
+    "@celticopetit/mlx-node": "0.1.0",
     "@huggingface/jinja": "0.5.13",
     "@huggingface/tokenizers": "0.2.0"
   }
