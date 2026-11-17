@@ -101,7 +101,7 @@
   </header>
 
   <div class="hero">
-    <span class="pill"><i></i>v0.1.0 · MIT · Apple Silicon</span>
+    <span class="pill"><i></i>v0.1.1 · MIT · Apple Silicon</span>
     <h1>Chat with and fine-tune LLMs from <em>Node.js</em>. No Python.</h1>
     <p class="lead">The JavaScript side of mlx-lm: the model's tokenizer and chat template, streaming answers, and LoRA training on your own conversations, all on the native <a href="https://celtico.github.io/mlx-node/">mlx-node</a> engine.</p>
     <div class="actions">
@@ -201,6 +201,17 @@ chat.model.<span class="fn">loadAdapters</span>(<span class="st">'./adapters'</s
       <div class="row"><div class="m">Peak memory<small>GB · less is better</small></div><div class="bars"><div class="bar2 node "><span>Node</span><div class="track"><div class="fill" style="width:100.0%"></div></div><span class="v">9.898 GB</span></div><div class="bar2  "><span>Python</span><div class="track"><div class="fill" style="width:100.0%"></div></div><span class="v">9.899 GB</span></div></div><div class="verdict even">Same</div></div>
     </div>
     <figure><img src="benchmark.jpg" alt="Engine benchmark in the Agentic Coder app: Node 5, Python 1, both engines give the same answer" loading="lazy"><figcaption>The same run in the app, in Catalan: Node wins 5 of the 6 measures.</figcaption></figure>
+  </section>
+
+  <section id="machines">
+    <h2>From a 16 GB Mac to a Mac Studio</h2>
+    <p class="sub">Every number on this page comes from an M2 Pro with 16 GB, the smallest Mac it is tested on. On a professional machine (an M Pro, Max or Ultra with more memory) the same code gives its best: what it can do is set by GPU memory and memory bandwidth, and both grow with the machine.</p>
+    <div class="grid">
+      <div class="card"><h3>16 GB · measured</h3><p>MiMo 9B 4-bit chats at 25 tok/s and reads prompts at 211 tok/s. LoRA trains on examples of up to 1,536 tokens, in 11.1 GB.</p></div>
+      <div class="card"><h3>32 GB or more</h3><p>Whole 4,096-token examples in training, and room for larger Qwen 3.5 models next to your other apps.</p></div>
+      <div class="card"><h3>Max and Ultra chips</h3><p>400 to 800+ GB/s of memory bandwidth against 200 on the M2 Pro: that is what sets the generation speed. More GPU cores read prompts and train faster.</p></div>
+    </div>
+    <p class="sub" style="margin-top:14px;font-size:14px">Only the 16 GB figures are measured; the others follow from how MLX uses memory and bandwidth.</p>
   </section>
 
   <section>
