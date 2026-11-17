@@ -42,7 +42,7 @@
     "test": "node --test test/*.test.js"
   },
   "dependencies": {
-    "@celticopetit/mlx-node": "0.1.2",
+    "@celticopetit/mlx-node": "0.1.3",
     "@huggingface/jinja": "0.5.13",
     "@huggingface/tokenizers": "0.2.0"
   }

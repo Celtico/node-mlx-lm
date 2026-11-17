@@ -123,7 +123,19 @@ async function trainLora(chat, data, options = {}) {
     // deltaChunk (the Gated DeltaNet in chunkwise form) and deltaSegment.
     const step = { learningRate: o.learningRate, gradCheckpoint: o.gradCheckpoint };
     for (const name of ['lossChunk', 'deltaChunk', 'deltaSegment']) if (o[name] !== undefined) step[name] = o[name];
-    const r = engine.trainStep(e.tokens, e.offset, e.length, step);
+    // macOS may abort long GPU work while the screen needs the GPU («Impacting Interactivity»). The engine
+    // (>= 0.1.2) changes nothing until the gradients are computed, so the step is retried a few times.
+    let r;
+    for (let attempt = 1; ; attempt++) {
+      try {
+        r = engine.trainStep(e.tokens, e.offset, e.length, step);
+        break;
+      } catch (error) {
+        if (attempt >= 10 || !/Impacting Interactivity/.test(String(error?.message))) throw error;
+        o.onRetry?.({ iteration: it, attempt, error: error.message });
+        await new Promise((resolve) => setTimeout(resolve, Math.min(30000, 3000 * attempt)));
+      }
+    }
     window.loss += r.loss;
     window.steps += 1;
     window.tokens += r.tokens;
