@@ -98,7 +98,10 @@ async function trainLora(chat, data, options = {}) {
   engine.loraInit({ numLayers: o.numLayers, rank: o.rank, scale: o.scale, seed: o.seed });
   if (o.resumeAdapterFile) engine.loraLoad(o.resumeAdapterFile, o.scale);
 
-  const examples = data.map((d) => padExample(tokenizeExample(chat, d, o.maskPrompt), o.maxSeqLength));
+  // An example cut at maxSeqLength before its completion starts has nothing to learn (and a loss of 0/0): left out.
+  const examples = data.map((d) => padExample(tokenizeExample(chat, d, o.maskPrompt), o.maxSeqLength)).filter((e) => e.offset < e.length);
+  if (!examples.length) throw new Error('No training example has its completion within maxSeqLength');
+  o.onSkipped?.(data.length - examples.length);
   const valExamples = o.valData.map((d) => padExample(tokenizeExample(chat, d, o.maskPrompt), o.maxSeqLength));
   const next = order(examples.length, mulberry32(o.seed));
 
