@@ -1,5 +1,9 @@
 # @celticopetit/node-mlx-lm
 
+![node-mlx-lm](docs/cover.png)
+
+**Website:** https://celtico.github.io/node-mlx-lm/
+
 Chat with and fine-tune MLX language models from Node.js — no Python.
 
 The JavaScript side of [mlx-lm](https://github.com/ml-explore/mlx-lm), on top of the native engine [@celticopetit/mlx-node](https://github.com/Celtico/mlx-node):
