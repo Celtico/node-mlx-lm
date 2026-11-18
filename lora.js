@@ -127,16 +127,17 @@ async function trainLora(chat, data, options = {}) {
     const step = { learningRate: o.learningRate, gradCheckpoint: o.gradCheckpoint };
     for (const name of ['lossChunk', 'deltaChunk', 'deltaSegment']) if (o[name] !== undefined) step[name] = o[name];
     // macOS may abort long GPU work while the screen needs the GPU («Impacting Interactivity»). The engine
-    // (>= 0.1.2) changes nothing until the gradients are computed, so the step is retried a few times.
+    // (>= 0.1.4) changes nothing until the gradients are computed, so the step is retried (maxRetries times,
+    // 10 by default, waiting longer each time, up to a minute: the screen may be in use for a while).
     let r;
     for (let attempt = 1; ; attempt++) {
       try {
         r = engine.trainStep(e.tokens, e.offset, e.length, step);
         break;
       } catch (error) {
-        if (attempt >= 10 || !/Impacting Interactivity/.test(String(error?.message))) throw error;
+        if (attempt >= (o.maxRetries ?? 10) || !/Impacting Interactivity/.test(String(error?.message))) throw error;
         o.onRetry?.({ iteration: it, attempt, error: error.message });
-        await new Promise((resolve) => setTimeout(resolve, Math.min(30000, 3000 * attempt)));
+        await new Promise((resolve) => setTimeout(resolve, Math.min(60000, 3000 * attempt)));
       }
     }
     window.loss += r.loss;
