@@ -1,6 +1,6 @@
 {
   "name": "@celticopetit/node-mlx-lm",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Chat with and fine-tune MLX language models from Node.js — no Python. Tokenizer, chat templates, streaming and LoRA training like mlx-lm, on @celticopetit/mlx-node.",
   "main": "index.js",
   "license": "MIT",
